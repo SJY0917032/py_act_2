@@ -13,4 +13,4 @@
 **정리**
 
 1. [1~7강 정리](https://github.com/SJY0917032/py_act/tree/master/OT)
-2. [8강~]()
+2. [8강~](https://github.com/SJY0917032/py_act_2/tree/master/강의정리)
