@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 from os.path import abspath, dirname
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,6 +23,7 @@ ADMINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,10 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third Apps
-    'django_extensions',
-    'debug_toolbar',
     'bootstrap4',
-    # Local Apps
+    'debug_toolbar',
+    'django_pydenticon',
+    # Locals Apps
     'accounts',
 ]
 
