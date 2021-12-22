@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.shortcuts import resolve_url
 
 class User(AbstractUser):
     class GenderChoices(models.TextChoices):
@@ -19,6 +20,17 @@ class User(AbstractUser):
     # TODO
     # 커스텀Validator로 이미지 체크하기~ 48px48px사이즈 이렇게..
     # 업로드 되는 날짜의 년월일별로 폴더를 만드는게 리소스 활용이 좋다.
+    
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    @property
+    def avatar_url(self):
+        if self.avatar:
+            return self.avatar
+        else:
+            return resolve_url("pydenticon_image", self.username)
     
     def send_welcome_email(self):
         

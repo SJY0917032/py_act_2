@@ -238,3 +238,9 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python,venv,jupyternotebooks
+.idea/misc.xml
+.idea/modules.xml
+.idea/py_act_2.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
