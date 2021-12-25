@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{% static 'bootstrap-4.3/css/bootstrap.min.css' %}" />
     <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'bootstrap-4.3/js/bootstrap.min.js' %}"></script>
@@ -16,13 +18,13 @@
 
 <body>
 
-    
+
     {% if messages %}
-        
-        {% bootstrap_messages %}
-            
+
+    {% bootstrap_messages %}
+
     {% endif %}
-        
+
 
     <div class="border-bottom mb-3">
         <div class="container">
@@ -60,7 +62,8 @@
                                 </svg>
                             </a>
                             <a class="p-2 text-dark" href="{% url 'profile_edit' %}">
-                                <img src='{{ user.avatar_url }}' class="rounded-circle" style="width:24px;height:24px;"/>
+                                <img src='{{ user.avatar_url }}' class="rounded-circle"
+                                    style="width:24px;height:24px;" />
                             </a>
                         </nav>
                     </div>
