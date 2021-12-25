@@ -10,6 +10,12 @@ class User(AbstractUser):
     class GenderChoices(models.TextChoices):
         MALE = "M", "남성"
         FEMALE = "F", "여성"
+        
+    follower_set = models.ManyToManyField("self", 
+                                          blank=True,
+                                          symmetrical=False,
+                                          related_name="following_set",)
+    
     
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True)
