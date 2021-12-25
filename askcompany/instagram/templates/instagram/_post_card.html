@@ -1,5 +1,5 @@
 {% load humanize instagram_tags %}
-
+{% load bootstrap4 %}
 
 <div class="card">
     <div class="card-header">
@@ -21,13 +21,9 @@
         </div>
 
         <!-- 댓글 삭제기능 구현 -->
-        <div class="comment-list mt-3">
+        <div id="post-{{ post.pk }}-comment-list" class="comment-list mt-3">
             {% for comment in post.comment_set.all  %}
-            <div class="comment">
-                <strong>{{comment.author}}</strong>
-                {{ comment.message }}
-                <small class="text-muted">{{ comment.created_at|naturaltime }}</small>
-            </div>
+            {% include 'instagram/_comment.html' %}
             {% endfor %}
         </div>
 
@@ -47,8 +43,28 @@
         </div>
     </div>
     <div class="card-footer">
-        <a href="{% url 'instagram:comment_new' post.pk %}">
-            댓글 쓰기
-        </a>
+        <form id="post-{{ post.pk }}-comment-form" action="{% url 'instagram:comment_new' post.pk %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form comment_form  %}
+            <input type="submit" value="댓글쓰기" class="btn btn-primary btn-block" />
+        </form>
+
+
+        <!-- 댓글쓰기 ajax 부분 -->
+        <script>
+        $(function(){
+            let form_id = "post-{{ post.pk }}-comment-form";
+            $("#" + form_id).submit(function(e){
+                e.preventDefault();
+                var options = {
+                    success : function(responseText, statusText, xhr, $form){  
+                        $("#post-{{post.pk}}-comment-list").prepend(responseText);
+                    }
+                };
+                $(this).ajaxSubmit(options);
+            });
+        });
+        </script>
+            
     </div>
 </div>

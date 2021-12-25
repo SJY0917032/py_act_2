@@ -6,11 +6,14 @@ from django.contrib import messages
 from django.db.models import Q
 from django.utils import timezone
 from .forms import CommentForm, PostForm
-from .models import Post, Tag
+from .models import Comment, Post, Tag
 
 
 @login_required
 def index(request):
+    # 댓글폼
+    comment_form = CommentForm()
+    
     # 3일까지의 타임라인만 보이게
     timesince = timezone.now() - timedelta(days=3)
     post_list = Post.objects.all()\
@@ -29,6 +32,7 @@ def index(request):
     return render(request, 'instagram/index.html', {
         "post_list" : post_list,
         "suggested_user_list" : suggested_user_list,
+        "comment_form" : comment_form,
     })
 
 
@@ -53,8 +57,11 @@ def post_new(request):
     
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    # 댓글쓰기 폼을 만든다.
+    comment_form = CommentForm()
     return render(request, "instagram/post_detail.html", {
         "post" : post,
+        "comment_form" : comment_form,
     })
     
 
@@ -103,6 +110,10 @@ def post_comment_new(request, post_pk):
             comment.author = request.user
             comment.post = post
             comment.save()
+            if request.is_ajax():
+                return render(request, "instagram/_comment.html", {
+                    "comment" : comment,
+                })
             return redirect(comment.post)
     else:
         form = CommentForm()
