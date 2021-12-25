@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'debug_toolbar',
     'django_pydenticon',
+    'easy_thumbnails',
     # Locals Apps
     'accounts',
     'instagram',
@@ -141,3 +142,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 WELCOME_EMAIL_SENDER = 'sea71511@gmail.com'
+
+# easy_thumbnails
+# THUMBNAIL_ALIASES = {
+#     '': {
+#         'avatar': {'size': (50, 50), 'crop': True},
+#     },
+# }
