@@ -3,7 +3,14 @@ from django.conf import settings
 from django.urls import reverse
 import re
 
-class Post(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    class Meta:
+        abstract = True
+
+class Post(BaseModel):
     # FK로 유저를 가져온다 -> settings에 세팅된 유저모델
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d")
@@ -11,7 +18,6 @@ class Post(models.Model):
     # 태그가 없는경우도 있기에 blank True
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100)
-    
         
     def __str__(self):
         return self.caption
